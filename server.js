@@ -19,8 +19,14 @@ app.set("view engine", "handlebars");
 
 // Import routes and give the server access to them.
 var routes = require("./controllers/streaming_controller.js");
-
+// console.log("routes",routes);
 app.use(routes);
+// var cat = {
+//   cat: "hannah"
+// }
+// app.get("/", function(req, res){
+//   res.render("index", cat)
+// })
 
 // Start our server so that it can begin listening to client requests.
 app.listen(PORT, function() {

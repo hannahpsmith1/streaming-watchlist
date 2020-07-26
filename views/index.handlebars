@@ -1,0 +1,24 @@
+<h1>TA-DA</h1>
+
+
+{{#each media}}
+<p>{{name}}</p>
+{{/each}}
+
+
+<h2>Add a Show</h2>
+<form class="create-form">
+
+  <div class="form-group">
+    <label for="ca">Show Name:</label>
+    <input type="text" id="ca" name="name">
+  </div>
+
+  <div class="form-group">
+    <label for="sleepy">Sleepy?</label><br>
+    <input type="radio" name="watched" value="0" checked> Not Watched!<br>
+    <input type="radio" name="watched" value="1"> Watched
+  </div>
+
+  <button type="submit">Add Show</button>
+</form>
