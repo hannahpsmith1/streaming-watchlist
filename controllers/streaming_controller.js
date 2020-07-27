@@ -5,15 +5,15 @@ var router = express.Router();
 var stream = require ("../models/streaming.js");
 
 router.get("/", function(req, res){
-  // stream.all(function(data){
-    stream.all (function(media){
-      // var hbsObject = {
-      //   media: data
-      // };
-      // console.log(hbsObject);
-        console.log(media)
-        res.render("index", media) 
-        // res.render("index", hbsObject);
+  stream.selectAll(function(data){
+    // stream.selectAll (function(media){
+      var hbsObject = {
+        media: data
+      };
+      console.log(hbsObject);
+        // console.log(media)
+        // res.render("index", media) 
+        res.render("index", hbsObject);
     });
   });
 

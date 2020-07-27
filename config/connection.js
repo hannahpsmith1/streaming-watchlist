@@ -1,5 +1,19 @@
 var mysql = require ("mysql"); 
+var connection;
+if(process.env.JAWSDB_URL){
+   connection = mysql.createConnection(process.env.JAWSDB_URL);
 
+}
+else {
+  connection = mysql.createConnection({
+  host: "localhost",
+  port: 3306,
+  user: "root",
+  password: "password",
+  database: "streaming_db"
+});
+
+}
 // var connection = mysql.createConnection({
 //   host: "localhost",
 //   port: 3306,
@@ -9,7 +23,7 @@ var mysql = require ("mysql");
 // });
 
 // for Heroku
-var connection = mysql.createConnection(process.env.JAWSDB_URL);
+// var connection = mysql.createConnection(process.env.JAWSDB_URL);
 
 
 // Make connection.
