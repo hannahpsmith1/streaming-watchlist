@@ -1,10 +1,4 @@
-<h1>TA-DA</h1>
-
-
-{{#each media}}
-<p>{{name}}</p>
-{{/each}}
-
+<h1>What to Watch </h1>
 
 <h2>Add a Show</h2>
 <form class="create-form">
@@ -15,10 +9,35 @@
   </div>
 
   <div class="form-group">
-    <label for="sleepy">Sleepy?</label><br>
-    <input type="radio" name="watched" value="0" checked> Not Watched!<br>
-    <input type="radio" name="watched" value="1"> Watched
+    <label for="sleepy">Show?</label><br>
+    <input type="radio" name="watched" value="false" checked> Not Watched
+    <input type="radio" name="watched" value="true"> Watched
   </div>
 
   <button type="submit">Add Show</button>
 </form>
+
+
+{{#each media}}
+<p>{{name}}</p>
+{{/each}}
+
+{{!-- Unordered list is not working because stream block is not working --}}
+
+{{!-- <ul>
+  {{#each media}}
+    {{#unless watched}}
+      {{> media/stream-block watched=true}}
+    {{/unless}}
+  {{/each}}
+</ul>
+
+<ul>
+  {{#each media}}
+    {{#if watched}}
+      {{> media/stream-block watched=false}}
+    {{/if}}
+  {{/each}}
+</ul> --}}
+
+
