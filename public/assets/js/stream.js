@@ -1,39 +1,52 @@
-// $(function() {
-//     $(".create-form").on("submit", function(event) {
-//         event.preventDefault();
+$(function(){
+    $(".show-watched").on("submit", function(event) {
+        event.preventDefault ();
 
-//         var newCountry = {
-//             country_name: $("#country").val().trim(),
-//             visited: $("[name=visited]:checked").val().trim()
-//         }
-//         console.log(newCountry);
-//         $.ajax("api/country", {
-//             type: "POST",
-//             data: newCountry
-//         }).then(
-//             function() {
-//                 console.log("changes country to", newCountry);
-//                 location.reload();
-//             }
-//         );
-//     });
-    
-//     $(".change-visited").on("click", function(event) {
-//         var id = $(this).data("id");
-//         var newVisted = $(this).data("newvisited");
+        var show_id = $(this).children(".show_name").val();
+        console.log(show_id);
+        $.ajax({
+            method: "PUT",
+            url: "/stream/" + show_id
+        }).then(function(data){
+            // location.reload();
+        })
 
-//         var newVisitedState = {
-//             visited: newVisted
-//         };
+    })
 
-//         $.ajax("/api/country/" + id, {
-//             type: "PUT",
-//             data: newVisitedState
-//         }).then(
-//             function() {
-//                 console.log("change visited to", newVisted);
+    $("#watched").click(function (){
+        console.log ('clicked');
+    });
 
-//                 location.reload();
-//             }
-//         );
-//     });
+    // $(".watched").on("click", function(event){
+    //     var id = $(this).data("id");
+    //     var newWatched = $(this).data("status");
+
+    //     var watchedStatusState = {
+    //         watched: newWatched
+    //     };
+
+    //     $.ajax("/api/media/" + id, {
+    //         type: "PUT",
+    //         data: watchedStatusState
+    //     }).then(
+    //         function() {
+    //             console.log ("Changed watched status to", newWatched);
+    //             location.reload();
+    //         }
+    //     )
+        
+        // var newWatchedState = {
+        //     unwatched: newWatched
+        // };
+
+        // $.ajax("/api/media/" +id, {
+        //     type: "PUT",
+        //     data: newWatchedState
+        // }).then (
+        //     function() {
+        //         console.log("changed watched to", newWatched);
+        //         location.reload();
+        //     }
+        // )
+    })
+// })

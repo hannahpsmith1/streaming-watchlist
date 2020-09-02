@@ -9,7 +9,7 @@ var stream = {
         });
     },
     insertOne: function(name, cb) {
-        orm.insertOne("media", [
+        orm.create("media", [
             "show_name", "watched"
         ], [
             name, false
@@ -18,10 +18,10 @@ var stream = {
 
     updateOne: function(id, cb) {
         var condition = "id=" + id;
-        orm.updateOne("media",  {
+        orm.update("media",  {
             watched: true
         }, condition, cb);
     }
-}
+};
 
 module.exports = stream;
