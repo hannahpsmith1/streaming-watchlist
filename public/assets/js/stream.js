@@ -8,7 +8,7 @@ $(function(){
             method: "PUT",
             url: "/stream/" + show_id
         }).then(function(data){
-            // location.reload();
+            location.reload();
         })
 
     })
