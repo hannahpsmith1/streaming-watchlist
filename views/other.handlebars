@@ -3,23 +3,22 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-12 text-center" id="top-bar">
-			{{!-- <img src="/assets/images/burger.png" alt="burger" /> --}}
-			<h1> Eat-Da-Burger! </h1>
+			<h1> Streaming Watchlist </h1>
 		</div>
 		<div class="col-md-6 text-center" class="task">
 			<div class="row">
 			  {{#each show_data}}
 			  	{{#unless this.watched}}
-                  {{> partials/change-watched watched=true}}
+                  {{!-- {{> partials/changed watched=true}} --}}
 				<div class="col-md-9 text-center">
 					<pre>{{this.id}}. {{this.show_name}}
 					</pre>
 				  		<!-- {{this.Date}} -->
 				</div>
-				<div class="col-md-3 text-center">
-					<form class="show-watch button-size">
+				<div class="col-md-3 text-center watched" id="watched">
+					<form action="api/media/" method="PUT" class="show-watch button-size">
 						<input input type="hidden" class="show_name" type="text" value={{this.id}}><br>
-						<button type="submit" class="btn btn-default">Devour it!</button>
+						<button type="submit" class="btn btn-default mark-watched-button ">Watched it!</button>
 					</form>
 				</div>
 				{{/unless}}
@@ -29,8 +28,8 @@
 		<div class="col-md-6 text-center" class="task">
 			  {{#each show_data}}
 			  	{{#if this.watched}}
-                  {{> partials/change-watched watched=false}}
-			  		<input class="form-control" type="text" placeholder="{{this.id}} . {{this.show_name}}" readonly>
+                  {{!-- {{> partials/changed watched=false}} --}}
+			  		<input class="form-control" type="text" placeholder="{{this.id}} . {{this.show_name}}">
 				{{/if}}
 			  {{/each}}
 		</div>
@@ -40,11 +39,13 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-12 text-center enter_section">
-			<form action="/stream/create" method="POST">
+			<form action="api/create/" method="POST">
 				<input type="text" class="form-control" name="show_name" value="" id="enter_text">
 				<button type="submit" class="btn btn-primary" id="text-enter-button">Submit</button>
 			</form>
-			<p>Enter a burger you want to eat Click the "Submit" button.</p>
+			<p>Enter a Show or Movie you want to watch</p>
 		</div>
 	</div>
 </div>
+
+

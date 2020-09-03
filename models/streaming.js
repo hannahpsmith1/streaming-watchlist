@@ -2,26 +2,16 @@
 var orm = require ("../config/orm.js");
 
 
-var stream = {
-    selectAll: function(cb) { 
-        orm.all("media", function(res) {
-            cb(res);
-        });
+const media = {
+    getAll: function(cb) {
+      orm.selectAll("media", cb);
     },
-    insertOne: function(name, cb) {
-        orm.create("media", [
-            "show_name", "watched"
-        ], [
-            name, false
-        ], cb);
-        },
+    add: function(show_name, cb) {
+      orm.insertOne("media", {show_name: show_name}, cb);
+    },
+    updateWatched: function(id, cb) {
+      orm.updateOne("media", {id: id}, {watched: true}, cb);
+    },
+  };
 
-    updateOne: function(id, cb) {
-        var condition = "id=" + id;
-        orm.update("media",  {
-            watched: true
-        }, condition, cb);
-    }
-};
-
-module.exports = stream;
+module.exports = media;

@@ -1,52 +1,16 @@
-$(function(){
-    $(".show-watched").on("submit", function(event) {
-        event.preventDefault ();
-
-        var show_id = $(this).children(".show_name").val();
-        console.log(show_id);
-        $.ajax({
-            method: "PUT",
-            url: "/stream/" + show_id
-        }).then(function(data){
-            location.reload();
-        })
-
-    })
-
-    $("#watched").click(function (){
-        console.log ('clicked');
+$(".mark-watched").click(event => {
+    const id = event.target.dataset.id;
+    $.ajax("/api/media/" + id, {
+        type: "PUT"
+    }).then(() => {
+        location.reload();
     });
-
-    // $(".watched").on("click", function(event){
-    //     var id = $(this).data("id");
-    //     var newWatched = $(this).data("status");
-
-    //     var watchedStatusState = {
-    //         watched: newWatched
-    //     };
-
-    //     $.ajax("/api/media/" + id, {
-    //         type: "PUT",
-    //         data: watchedStatusState
-    //     }).then(
-    //         function() {
-    //             console.log ("Changed watched status to", newWatched);
-    //             location.reload();
-    //         }
-    //     )
-        
-        // var newWatchedState = {
-        //     unwatched: newWatched
-        // };
-
-        // $.ajax("/api/media/" +id, {
-        //     type: "PUT",
-        //     data: newWatchedState
-        // }).then (
-        //     function() {
-        //         console.log("changed watched to", newWatched);
-        //         location.reload();
-        //     }
-        // )
-    })
-// })
+});
+$(".delete-button").click(event => {
+    const id = event.target.dataset.id;
+    $.ajax("/api/media/" + id, {
+        type: "DELETE"
+    }).then(() => {
+        location.reload();
+    });
+});

@@ -1,49 +1,36 @@
-
-
 <div class="container">
 	<div class="row">
 		<div class="col-md-12 text-center" id="top-bar">
 			<h1> Streaming Watchlist </h1>
 		</div>
 		<div class="col-md-6 text-center" class="task">
-			<div class="row">
-			  {{#each show_data}}
-			  	{{#unless this.watched}}
-                  {{!-- {{> partials/changed watched=true}} --}}
-				<div class="col-md-9 text-center">
-					<pre>{{this.id}}. {{this.show_name}}
-					</pre>
-				  		<!-- {{this.Date}} -->
-				</div>
-				<div class="col-md-3 text-center watched" id="watched">
-					<form class="show-watch button-size">
-						<input input type="hidden" class="show_name" type="text" value={{this.id}}><br>
-						<button type="submit" class="btn btn-default">Watched it!</button>
-					</form>
-				</div>
-				{{/unless}}
-			  {{/each}}
-			</div>
+			<h2>To Watch</h2>
+			{{#each media}}
+			{{#unless watched}}
+			<li>{{show_name}} <button class="btn btn-primary" data-id={{id}}>Watched?</button></li>
+			{{/unless}}
+			{{/each}}
 		</div>
 		<div class="col-md-6 text-center" class="task">
-			  {{#each show_data}}
-			  	{{#if this.watched}}
-                  {{!-- {{> partials/changed watched=false}} --}}
-			  		<input class="form-control" type="text" placeholder="{{this.id}} . {{this.show_name}}">
-				{{/if}}
-			  {{/each}}
+			<h2>Watched</h2>
+			{{#each media}}
+			{{#if watched}}
+			<li>{{show_name}}</li>
+			{{/if}}
+			{{/each}}
 		</div>
 	</div>
-</div>
+	</div>
 
-<div class="container">
+	<div class="container">
 	<div class="row">
 		<div class="col-md-12 text-center enter_section">
-			<form action="/stream/create" method="POST">
-				<input type="text" class="form-control" name="show_name" value="" id="enter_text">
-				<button type="submit" class="btn btn-primary" id="text-enter-button">Submit</button>
-			</form>
+				<form action="/api/media/new" method="post" autocomplete="off">
+					<input type="text" id="new-book-title" name="show_name" placeholder="Game of Thrones">
+					<button type="submit" class="btn btn-primary">Add to Watchlist</button>
+				</form>
 			<p>Enter a Show or Movie you want to watch</p>
 		</div>
 	</div>
 </div>
+

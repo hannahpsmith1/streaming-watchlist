@@ -1,109 +1,40 @@
-// // Currently entirely copied from 18 catsapp-deploy
-// // Import MySQL connection.
-var connection = require("./connection.js");
-
-// Helper function for SQL syntax.
-// Let's say we want to pass 3 values into the mySQL query.
-// In order to write the query, we need 3 question marks.
-// The above helper function loops through and creates an array of question marks - ["?", "?", "?"] - and turns it into a string.
-// ["?", "?", "?"].toString() => "?,?,?";
-function printQuestionMarks(num) {
-  var arr = [];
-
-  for (var i = 0; i < num; i++) {
-    arr.push("?");
-  }
-
-  return arr.toString();
-}
-
-// Helper function to convert object key/value pairs to SQL syntax
-function objToSql(ob) {
-  var arr = [];
-
-  // loop through the keys and push the key/value as a string int arr
-  for (var key in ob) {
-    // var value = ob[key];
-    // check to skip hidden properties
-    // if (Object.hasOwnProperty.call(ob, key)) {
-      // if string with spaces, add quotations (Lana Del Grey => 'Lana Del Grey')
-      // if (typeof value === "string" && value.indexOf(" ") >= 0) {
-      //   value = "'" + value + "'";
-      // }
-      // e.g. {name: 'Lana Del Grey'} => ["name='Lana Del Grey'"]
-      // e.g. {sleepy: true} => ["sleepy=true"]
-      arr.push(key + "=" + value);
-    }
-  
-
-  // translate array of strings to a single comma-separated string
-  return arr.toString();
-}
 
 
-var orm = {
-    all: function(tableInput, cb) {
-      var queryString = "SELECT * FROM " + tableInput + ";";
-      connection.query(queryString, function(err, result) {
-        if (err) {
-          throw err;
-        }
-        cb(result);
-      });
-    },
-    create: function(table, cols, vals, cb) {
-      var queryString = "INSERT INTO " + table;
-  
-      queryString += " (";
-      queryString += cols.toString();
-      queryString += ") ";
-      queryString += "VALUES (";
-      queryString += printQuestionMarks(vals.length);
-      queryString += ") ";
-  
-      console.log(queryString);
-  
-      connection.query(queryString, vals, function(err, result) {
-        if (err) {
-          throw err;
-        }
-  
-        cb(result);
-      });
-    },
-    // An example of objColVals would be {name: panther, sleepy: true}
-    update: function(table, objColVals, condition, cb) {
-      var queryString = "UPDATE " + table;
-  
-      queryString += " SET ";
-      queryString += objToSql(objColVals);
-      queryString += " WHERE ";
-      queryString += condition;
-  
-      console.log(queryString);
-      connection.query(queryString, function(err, result) {
-        if (err) {
-          throw err;
-        }
-  
-        cb(result);
-      });
-    },
-    delete: function(table, condition, cb) {
-      var queryString = "DELETE FROM " + table;
-      queryString += " WHERE ";
-      queryString += condition;
-  
-      connection.query(queryString, function(err, result) {
-        if (err) {
-          throw err;
-        }
-  
-        cb(result);
-      });
-    }
-  };
-    
-  
+const connection = require("./connection.js");
 
-  module.exports = orm;
+const orm = {
+  selectAll: function(tableName, cb) {
+    // gets all data in the table identified by tableName and calls cb on the result
+    connection.query("SELECT * FROM ??", tableName, (err, result) => {
+      if (err) throw err;
+      cb(result);
+    });
+  },
+
+  insertOne: function(tableName, data, cb) {
+    // inserts a row with provided data to the table identified by tableName
+    connection.query("INSERT INTO ?? SET ?", [tableName, data], (err, result) => {
+      if (err) throw err;
+      cb(result);
+    });
+  },
+
+  updateOne: function(tableName, whereCondition, newData, cb) {
+    // update the row in tableName satisfying whereCondition (object with columnName-value pair)
+    // with provided newData (object of form {columnName: newValue})
+    connection.query("UPDATE ?? SET ? WHERE ?", [tableName, newData, whereCondition], (err, result) => {
+      if (err) throw err;
+      cb(result);
+    });
+  },
+
+  deleteOne: function(tableName, whereCondition, cb) {
+    // delete row that satisfies whereCondition in tableName
+    connection.query("DELETE FROM ?? WHERE ?", [tableName, whereCondition], (err, result) => {
+      if (err) throw err;
+      cb(result);
+    });
+  },
+};
+
+module.exports = orm;
