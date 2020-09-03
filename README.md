@@ -57,7 +57,6 @@ Within terminal there are several shortcuts you can take to auto-fill values whi
 
 [jQuery](https://jquery.com/)
 
-[Moment](https://momentjs.com/)
 
 ---
 
