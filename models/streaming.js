@@ -6,8 +6,8 @@ const media = {
     getAll: function(cb) {
       orm.selectAll("media", cb);
     },
-    add: function(show_name, cb) {
-      orm.insertOne("media", {show_name: show_name}, cb);
+    add: function(name, cb) {
+      orm.insertOne("media", {name: name}, cb);
     },
     updateWatched: function(id, cb) {
       orm.updateOne("media", {id: id}, {watched: true}, cb);

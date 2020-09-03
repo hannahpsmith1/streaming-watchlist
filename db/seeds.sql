@@ -1,8 +1,8 @@
-INSERT INTO media (show_name) VALUES ("Game of Thrones");
-INSERT INTO media (show_name) VALUES ("30 Rock");
-INSERT INTO media (show_name, watched) VALUES ("The Matrix", true); 
-INSERT INTO media (show_name, watched) VALUES ("Mean Girls", true);
-INSERT INTO media (show_name) VALUES ("Real Housewives of New York");
-INSERT INTO media (show_name) VALUES ("Floor is Lava");
-INSERT INTO media (show_name, watched) VALUES ("Alone", false);
-INSERT INTO media (show_name, watched) VALUES ("Jeopardy", false);
+INSERT INTO media (name) VALUES ("Game of Thrones");
+INSERT INTO media (name) VALUES ("30 Rock");
+INSERT INTO media (name, watched) VALUES ("The Matrix", true); 
+INSERT INTO media (name, watched) VALUES ("Mean Girls", true);
+INSERT INTO media (name) VALUES ("Real Housewives of New York");
+INSERT INTO media (name) VALUES ("Floor is Lava");
+INSERT INTO media (name, watched) VALUES ("Alone", false);
+INSERT INTO media (name, watched) VALUES ("Jeopardy", false);

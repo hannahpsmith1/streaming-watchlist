@@ -4,7 +4,7 @@ USE streaming_db;
 
 CREATE TABLE media (
     id INT AUTO_INCREMENT NOT NULL,
-    show_name VARCHAR (100) NOT NULL,
+    name VARCHAR (100) NOT NULL,
     watched BOOLEAN DEFAULT false,
     PRIMARY KEY (id)
 );

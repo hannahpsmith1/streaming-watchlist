@@ -15,7 +15,7 @@ router.get("/", (req, res) => {
 
 // add a show
 router.post("/api/media/new", (req, res) => {
-  media.add(req.body.show_name, result => {
+  media.add(req.body.name, result => {
     if (result.affectedRows === 0) {
       // No rows were affected, so there must have been an error.
       return res.status(500).end();
